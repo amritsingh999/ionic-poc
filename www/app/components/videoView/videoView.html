@@ -1,81 +1,40 @@
 <ion-view ng-controller="videoViewController">
     <style>
-            #videoContainer {
-                background-color: #000;
-                width: 100%;
-                height: 100%;
-            }
+        #videoContainer {
+            background-color: #000;
+            width: 100%;
+            flex-grow: 1;
+        }
 
-            /*#logContainer {
-          display:none;
-        }*/
+        .vertical-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
-            #endCallButton {
-            }
+        .buttons {
+            display: flex;
+            z-index: 3;
+            background-color: rgba(84, 87, 87, 0.6);
+            padding: 10px;
+        }
 
-            #muteCallButton {
-            }
+        .button-call-end {
+            flex-grow: 1;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            background-color: red;
+            text-transform: uppercase;
+        }
 
-            .button.button-red {
-                background-color: red;
-            }
-
-            .buttons {
-                z-index: 3;
-                position: absolute;
-                bottom: 0px;
-                background-color: rgba(46, 49, 49, 0.6);
-                width: 100%;
-                padding: 10px;
-            }
-
-            .btn-icon {
-                width: 32px;
-            }
-
-            .button-call-end {
-                background-image: url(../../../img/phone-icon.png);
-            }
-
-            .button-call-mute {
-                background-image: url(../../../img/setting.png);
-            }
-
-            .button-call-perscript {
-                float: right;
-            }
-
-            .call-button {
-                margin: 0 0 0 5px;
-                height: 32px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: contain;
-                color: #fff;
-            }
     </style>
-    <ion-content padding="true" class="page-container-button notif-confirm" overflow-scroll="true">
-        <form class="page-container paddingbottom-button">
-            <div class="row">
-                <div class="col">
-                    <div id="videoContainer">
-                        <div class="buttons">
-                            <div id="muteCallButton" class="button button-dark btn-icon call-button button-call-mute btn-call-unmuted"></div>
-                            <div id="endCallButton" class="button button-red btn-icon call-button button-call-end"></div>
-                            <div id="switchButton" class="button button-red btn-icon call-button button-call-video-switch">Sw</div>
-                            <div id="perscriptionButton" class="button button-dark call-button button-call-perscript">OPEN PRESCRIPTION</div>
-                        </div>
-                    </div>
-                </div>
+    <ion-content padding="false" overflow-scroll="true">
+        <div class="vertical-container">
+            <div id="videoContainer"></div>
+            <div class="buttons">
+                <ion-button class="button-call-end" ng-click="endCall()">End Call</ion-button>
             </div>
-            <div class="row" id="prescriptionForm" style="display: none;">
-                <div class="col">
-                    <div id="closeButton" class="button button-dark">
-                        Close Window
-                    </div>
-                </div>
-            </div>
-            </div>-->
-        </form>
+        </div>
     </ion-content>
 </ion-view>
