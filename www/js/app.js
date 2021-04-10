@@ -5,24 +5,33 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs).
-    // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
-    // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
-    // useful especially with forms, though we would prefer giving the user a little more room
-    // to interact with the app.
-    if (window.cordova && window.Keyboard) {
-      console.log('hiding the bar');
-      window.Keyboard.hideKeyboardAccessoryBar(true);
-    }
+    .run(function ($ionicPlatform) {
+        $ionicPlatform.ready(function () {
+            
+            if (window.cordova && window.Keyboard) {
+                window.Keyboard.hideKeyboardAccessoryBar(true);
+            }
 
-    if (window.StatusBar) {
-      console.log('hiding the bar');
-      // Set the statusbar to use the default style, tweak this to
-      // remove the status bar on iOS or change it to use white instead of dark colors.
-      StatusBar.styleDefault();
-    }
-  });
-})
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+            
+            // Ask for android permissions. 
+            // Make sure Androidmanifest lists the permissions asked.
+            if (window.cordova && cordova.platformId === 'android') {
+                var permissions = cordova.plugins.permissions;
+                
+                permissions.requestPermission(permissions.CAMERA, success, error);
+                permissions.requestPermission(permissions.MODIFY_AUDIO_SETTINGS, success, error);
+                permissions.requestPermission(permissions.RECORD_AUDIO, success, error);
+
+                function error() {
+                    console.warn('Permissions not turned on.');
+                }
+                function success(status) {
+                    if (!status.hasPermission) error();
+                    else console.log('Permission request accepted');
+                }
+            }
+        });
+    })
