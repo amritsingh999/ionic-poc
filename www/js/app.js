@@ -34,33 +34,27 @@ app.run(function ($ionicPlatform) {
 });
 
 app.config(['$urlRouterProvider', '$stateProvider',
-    function($urlRouterProvider, $stateProvider) {
-        $urlRouterProvider.otherwise('/');
+    function ($urlRouterProvider, $stateProvider) {
+        
+        $urlRouterProvider.otherwise('/home');
 
         $stateProvider
-            .state('root', {
-                url: '/',
-                abstract: true,
-                template: '<ui-view></ui-view>',
-                controller: 'baseController'
+            .state('home', {
+                url: '/home',
+                views: {
+                    'main': {
+                        templateUrl: 'app/components/home/home.html',
+                    },
+                }
             })
             .state('videoView', {
                 url: '/videoView',
-                templateUrl: 'app/components/videoView/videoView.html',
-                controller: 'videoViewController'
+                cache: false,
+                views: {
+                    'main': {
+                        templateUrl: 'app/components/videoView/videoView.html',
+                    },
+                }
             });
-    }
-])
-
-app.run(['$state', '$window',
-    function ($state, $window) {
-        console.log('app run state window');
-        $window.addEventListener('LaunchUrl', function (event) {
-            // gets page name from url
-            var page = /.*:[/]{2}([^?]*)[?]?(.*)/.exec(event.detail.url)[1];
-            // redirects to page specified in url
-            console.log('state: ', event, page);
-            $state.go('tab.' + page, {});
-        });
     }
 ]);
